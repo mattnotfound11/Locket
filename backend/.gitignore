@@ -1,0 +1,56 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+vendor/
+
+# Build output
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+service-account*.json
+
+# Databases
+*.sqlite
+*.sqlite3
+*.db
+data/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Testing
+coverage/
+.nyc_output/
+.pytest_cache/
+
+# Python (if used)
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Caches
+.cache/
+.eslintcache
+.turbo/
+
+# Editors / OS
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db

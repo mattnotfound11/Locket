@@ -24,7 +24,7 @@ export function Footer() {
           style={{ borderTop: '1.5px solid var(--border)' }}
         >
           <div>
-            <ShopMark width={220} sizes="220px" className="mb-5 items-start" />
+            <ShopMark width={220} sizes="220px" className="mb-5" />
             <p className="max-w-[34ch] text-[15px] leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
               {STORE.tagline}. Baked each morning in {STORE.address.city}, and never the day before.
             </p>

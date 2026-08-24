@@ -3,8 +3,7 @@ import Link from 'next/link';
 import { Phone, EnvelopeSimple, ChatCircleDots, Cake } from '@phosphor-icons/react/dist/ssr';
 import { PageIntro } from '@/components/layout/PageIntro';
 import { ContactForm } from '@/components/layout/ContactForm';
-import { STORE, FULL_ADDRESS, MAP_EMBED_SRC, MAP_LINK, summarisedHours } from '@/config/store';
-import { OpenStatus } from '@/components/layout/OpenStatus';
+import { STORE, FULL_ADDRESS, MAP_EMBED_SRC, MAP_LINK } from '@/config/store';
 import { Reveal } from '@/components/motion/Reveal';
 
 export const metadata: Metadata = {
@@ -13,14 +12,12 @@ export const metadata: Metadata = {
 };
 
 const CHANNELS = [
-  { icon: Phone, title: 'Call the counter', body: STORE.phone, href: STORE.phoneHref, note: 'Fastest during opening hours.' },
+  { icon: Phone, title: 'Call or message us', body: STORE.phone, href: STORE.phoneHref, note: 'The fastest way to reach us.' },
   { icon: EnvelopeSimple, title: 'Email us', body: STORE.email, href: `mailto:${STORE.email}`, note: 'We reply within one working day.' },
   { icon: Cake, title: 'Custom cake brief', body: 'Start an order', href: '/custom-orders', note: 'Quotes come back within one working day.' },
 ];
 
 export default function ContactPage() {
-  const hours = summarisedHours();
-
   return (
     <>
       <PageIntro
@@ -74,10 +71,9 @@ export default function ContactPage() {
           </div>
 
           <div>
-            <h2 className="display mb-4 text-[30px]" style={{ color: 'var(--brand-strong)' }}>The shop</h2>
+            <h2 className="display mb-4 text-[30px]" style={{ color: 'var(--brand-strong)' }}>Where we bake</h2>
 
             <div className="card mb-4 p-5">
-              <OpenStatus />
               <address className="mt-4 not-italic text-[15.5px] leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
                 {STORE.address.line1}<br />
                 {STORE.address.line2}<br />
@@ -85,14 +81,6 @@ export default function ContactPage() {
                 {STORE.address.country}
               </address>
 
-              <dl className="mt-5 space-y-1.5 pt-4 text-[15px]" style={{ borderTop: '1.5px dashed var(--border)' }}>
-                {hours.map((row) => (
-                  <div key={row.days} className="flex justify-between gap-4" style={{ color: 'var(--ink-soft)' }}>
-                    <dt className="font-bold" style={{ color: 'var(--ink)' }}>{row.days}</dt>
-                    <dd className="tabular-nums">{row.hours}</dd>
-                  </div>
-                ))}
-              </dl>
             </div>
 
             <div className="overflow-hidden" style={{ borderRadius: 'var(--radius-card)', border: '1.5px solid var(--border)' }}>

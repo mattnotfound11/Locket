@@ -1,14 +1,11 @@
-import { MapPin, Clock, Phone, ArrowSquareOut } from '@phosphor-icons/react/dist/ssr';
-import { STORE, FULL_ADDRESS, MAP_EMBED_SRC, MAP_LINK, summarisedHours } from '@/config/store';
-import { OpenStatus } from './OpenStatus';
+import { MapPin, Phone, ArrowSquareOut } from '@phosphor-icons/react/dist/ssr';
+import { STORE, FULL_ADDRESS, MAP_EMBED_SRC, MAP_LINK } from '@/config/store';
 
 /**
  * Address, hours, phone and a live map. Rendered inside the footer so it
  * appears on every page of the site without each page having to remember.
  */
 export function StoreStrip() {
-  const hours = summarisedHours();
-
   return (
     <section
       className="grid gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-12"
@@ -17,7 +14,7 @@ export function StoreStrip() {
       <div className="grid gap-7 sm:grid-cols-2 lg:gap-8">
         <div>
           <h3 className="display mb-3 flex items-center gap-2 text-[19px]" style={{ color: 'var(--brand-strong)' }}>
-            <MapPin size={20} weight="fill" /> Find us
+            <MapPin size={20} weight="fill" /> Where we bake
           </h3>
           <address className="not-italic text-[15px] leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
             {STORE.address.line1}<br />
@@ -36,21 +33,6 @@ export function StoreStrip() {
         </div>
 
         <div>
-          <h3 className="display mb-3 flex items-center gap-2 text-[19px]" style={{ color: 'var(--brand-strong)' }}>
-            <Clock size={20} weight="fill" /> Hours
-          </h3>
-          <OpenStatus />
-          <dl className="mt-3 space-y-1.5 text-[15px]">
-            {hours.map((row) => (
-              <div key={row.days} className="flex justify-between gap-4" style={{ color: 'var(--ink-soft)' }}>
-                <dt className="font-bold" style={{ color: 'var(--ink)' }}>{row.days}</dt>
-                <dd className="tabular-nums">{row.hours}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
-
-        <div className="sm:col-span-2">
           <h3 className="display mb-3 flex items-center gap-2 text-[19px]" style={{ color: 'var(--brand-strong)' }}>
             <Phone size={20} weight="fill" /> Talk to us
           </h3>

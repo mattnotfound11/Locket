@@ -56,11 +56,6 @@ const BAKERY_SCHEMA = {
   },
   hasMap: MAP_LINK,
   priceRange: '₱₱',
-  openingHoursSpecification: [
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Tuesday', 'Wednesday', 'Thursday'], opens: '09:00', closes: '19:00' },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Friday', 'Saturday'], opens: '09:00', closes: '21:00' },
-    { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Sunday'], opens: '10:00', closes: '18:00' },
-  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -132,7 +132,7 @@ export const PRODUCTS: readonly Product[] = [
   {
     id: 'chl-002', slug: 'brownie-sundae', name: 'Brownie Sundae',
     category: 'chilled', price: 22500, unit: 'per serving',
-    description: 'Warm fudge brownie, vanilla bean ice cream, salted caramel poured at the counter.',
+    description: 'Warm fudge brownie, vanilla bean ice cream, salted caramel poured just before it goes out.',
     image: '/products/brownie-sundae.webp',
     allergens: ['gluten', 'dairy', 'eggs', 'soy'], dietary: ['vegetarian', 'nut-free'],
   },

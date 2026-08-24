@@ -191,7 +191,7 @@ export function CheckoutClient() {
 
             <div className="mb-5 grid gap-2 sm:grid-cols-2" role="group" aria-label="Pickup or delivery">
               {([
-                { id: 'pickup', label: 'Pick up in store', note: 'Free. Lopez Jaena Street, Jaro.', icon: Storefront },
+                { id: 'pickup', label: 'Collect from us', note: 'Free. Collected from our kitchen in Jaro.', icon: Storefront },
                 { id: 'delivery', label: 'Delivery', note: `Iloilo City only. ${peso(PRICING.deliveryFee)}, free over ${peso(PRICING.freeDeliveryFrom)}.`, icon: MopedFront },
               ] as const).map((opt) => {
                 const Icon = opt.icon;

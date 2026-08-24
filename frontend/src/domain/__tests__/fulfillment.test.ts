@@ -12,12 +12,12 @@ const SAT = '2026-09-12';
 
 const at = (day: string, h: number, m = 0) => new Date(`${day}T${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}:00`);
 
-describe('opening hours drive the windows', () => {
-  it('produces no windows on the closed day', () => {
+describe('fulfilment hours drive the windows', () => {
+  it('produces no windows on the day off', () => {
     expect(windowsForDate(MON)).toHaveLength(0);
   });
 
-  it('produces hourly windows inside opening hours', () => {
+  it('produces hourly windows inside the fulfilment hours', () => {
     const w = windowsForDate(TUE); // Tue 9am - 7pm
     expect(w).toHaveLength(10);
     expect(w[0].label).toBe('9am - 10am');

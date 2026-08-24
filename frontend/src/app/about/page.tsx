@@ -26,15 +26,15 @@ export default function AboutPage() {
     <>
       <PageIntro
         eyebrow="About"
-        title="The shop on Lopez Jaena Street"
-        lede={`${STORE.tagline}. What began as a weekend cookie table now runs as a small kitchen with a shopfront, a delivery bike and a very full Saturday.`}
+        title="A small kitchen in Jaro"
+        lede={`${STORE.tagline}. What began as a weekend cookie table now runs as a small kitchen, a delivery bike and a very full Saturday. We bake to order rather than keep a shop.`}
       />
 
       <section className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6 lg:py-24">
         <div className="grid items-start gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
           <Reveal variant="left" className="space-y-5 text-[16.5px] leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
             <p className="text-[19px] font-bold" style={{ color: 'var(--ink)' }}>
-              We opened because a cookie tray kept running out.
+              We started because a cookie tray kept running out.
             </p>
             <p>
               Locket began at a weekend market stall with one recipe and a folding table. The tray
@@ -42,21 +42,21 @@ export default function AboutPage() {
               start turning people away.
             </p>
             <p>
-              The shop in Jaro opened so we could bake through the day instead of once before dawn.
-              The kitchen is still small on purpose. Every batch is mixed, portioned and baked in
-              trays that fit our ovens, which is the honest reason some things carry a sold out flag
-              by mid afternoon.
+              So we moved into a proper kitchen in Jaro and started baking to order instead of
+              once before dawn. There is no shopfront to walk into. Every batch is mixed, portioned
+              and baked in trays that fit our ovens, which is the honest reason some things carry a
+              sold out flag by mid afternoon.
             </p>
             <p>
               Custom work grew out of the same thing. People kept asking for the birthday version of
-              something on the counter, so we built a proper brief form for it: the occasion, the
+              something on the menu, so we built a proper brief form for it: the occasion, the
               date, how many it feeds, the flavours, and a photo of what you have in mind.
             </p>
           </Reveal>
 
           <Image
             src="/products/about-counter.webp"
-            alt="Rows of mini fruit tartlets arranged on the counter"
+            alt="Rows of mini fruit tartlets fresh out of the kitchen"
             width={1280}
             height={860}
             sizes="(max-width: 1024px) 100vw, 42vw"

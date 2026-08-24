@@ -1,4 +1,4 @@
-import { HOURS, type DayIndex, formatMinutes } from '@/config/store';
+import { FULFILMENT_HOURS, type DayIndex, formatMinutes } from '@/config/store';
 
 export type FulfilmentMode = 'pickup' | 'delivery';
 
@@ -70,7 +70,7 @@ export function formatSlotDate(
 /** Bare windows for a day, before availability is considered. */
 export function windowsForDate(dateKey: string, rules: SlotRules = DEFAULT_RULES) {
   const day = fromDateKey(dateKey).getDay() as DayIndex;
-  const hours = HOURS[day];
+  const hours = FULFILMENT_HOURS[day];
   if (!hours) return [];
 
   const out: { start: number; end: number; label: string }[] = [];

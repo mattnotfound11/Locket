@@ -25,7 +25,7 @@ export const PAYMENT_METHODS: readonly PaymentMethod[] = [
     supportsDeposit: true, availableForDepositOnly: false, settlement: 'online',
   },
   {
-    id: 'cod', name: 'Cash on pickup or delivery', blurb: 'Pay the rider or the counter when you get it.',
+    id: 'cod', name: 'Cash on pickup or delivery', blurb: 'Pay the rider, or pay us when you collect.',
     supportsDeposit: false, availableForDepositOnly: true, settlement: 'on-collection',
   },
 ];

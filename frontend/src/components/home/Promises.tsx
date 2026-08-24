@@ -1,4 +1,5 @@
 import { Alarm, PaintBrushHousehold, MopedFront } from '@phosphor-icons/react/dist/ssr';
+import { Reveal } from '@/components/motion/Reveal';
 
 const PROMISES = [
   {
@@ -28,10 +29,11 @@ export function Promises() {
         {PROMISES.map((p, i) => {
           const Icon = p.icon;
           return (
-            <div
+            <Reveal
               key={p.title}
+              delay={i * 90}
               className="card p-6 lg:p-7"
-              style={{ marginTop: i === 1 ? undefined : 0, transform: i === 1 ? 'translateY(18px)' : undefined }}
+              style={{ marginTop: i === 1 ? undefined : 0 }}
             >
               <span
                 className="mb-4 flex h-12 w-12 items-center justify-center rounded-full"
@@ -41,7 +43,7 @@ export function Promises() {
               </span>
               <h3 className="display text-[22px]" style={{ color: 'var(--brand-strong)' }}>{p.title}</h3>
               <p className="mt-2 text-[15px] leading-relaxed" style={{ color: 'var(--ink-soft)' }}>{p.body}</p>
-            </div>
+            </Reveal>
           );
         })}
       </div>

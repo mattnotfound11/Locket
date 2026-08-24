@@ -4,6 +4,8 @@ import { STORE, MAP_LINK } from '@/config/store';
 import { CartProvider } from '@/lib/cart';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
+import { PageTransition } from '@/components/motion/PageTransition';
+import { ScrollElevation } from '@/components/motion/ScrollElevation';
 import './globals.css';
 
 const baloo = Baloo_2({ subsets: ['latin'], weight: ['600', '700', '800'], variable: '--font-baloo', display: 'swap' });
@@ -64,7 +66,21 @@ const BAKERY_SCHEMA = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en-PH" className={`${baloo.variable} ${nunito.variable} ${caveat.variable}`}>
+      <head>
+        {/*
+          Marks the document before first paint so reveal elements start hidden
+          without a flash. If scripting is off the class never lands and every
+          element renders visible, which is the safe direction to fail.
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "document.documentElement.classList.add('motion-ready')",
+          }}
+        />
+      </head>
       <body id="top">
+        <div id="scroll-sentinel" aria-hidden />
+        <ScrollElevation />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(BAKERY_SCHEMA) }}
@@ -78,7 +94,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <CartProvider>
           <Header />
-          <main id="main">{children}</main>
+          <main id="main">
+            <PageTransition>{children}</PageTransition>
+          </main>
           <Footer />
         </CartProvider>
       </body>

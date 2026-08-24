@@ -32,7 +32,7 @@ export function Header() {
 
   return (
     <header
-      className="sticky top-0 z-40 backdrop-blur-md"
+      className="site-header sticky top-0 z-40 backdrop-blur-md"
       style={{ background: 'color-mix(in srgb, var(--bg) 88%, transparent)', borderBottom: '1.5px solid var(--border)' }}
     >
       <div className="mx-auto flex h-[72px] max-w-[1400px] items-center gap-4 px-4 sm:px-6">

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { ArrowRight } from '@phosphor-icons/react/dist/ssr';
 import { PRODUCTS } from '@/domain/catalog/products';
 import { peso } from '@/domain/money';
+import { Reveal } from '@/components/motion/Reveal';
 
 /** Horizontal scroll-snap rail, so breadth reads without a wall of cards. */
 export function Bestsellers() {
@@ -11,7 +12,7 @@ export function Bestsellers() {
   return (
     <section className="py-16 lg:py-24" aria-labelledby="bestsellers-title" style={{ background: 'var(--bg-alt)' }}>
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
-        <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
+        <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-4">
           <div>
             <h2 id="bestsellers-title" className="display text-[36px] sm:text-[46px]" style={{ color: 'var(--brand-strong)' }}>
               What sells out first
@@ -23,7 +24,7 @@ export function Bestsellers() {
           <Link href="/products" className="btn btn-outline h-11 px-5 text-sm">
             Full menu <ArrowRight size={15} weight="bold" aria-hidden />
           </Link>
-        </div>
+        </Reveal>
       </div>
 
       <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 sm:px-6 lg:mx-auto lg:max-w-[1400px]">

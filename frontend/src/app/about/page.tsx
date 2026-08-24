@@ -3,6 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Heart, Leaf, Timer, Users } from '@phosphor-icons/react/dist/ssr';
 import { PageIntro } from '@/components/layout/PageIntro';
+import { ShopMark } from '@/components/layout/ShopMark';
+import { Reveal } from '@/components/motion/Reveal';
 import { STORE } from '@/config/store';
 
 export const metadata: Metadata = {
@@ -30,7 +32,7 @@ export default function AboutPage() {
 
       <section className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6 lg:py-24">
         <div className="grid items-start gap-10 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
-          <div className="space-y-5 text-[16.5px] leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
+          <Reveal variant="left" className="space-y-5 text-[16.5px] leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
             <p className="text-[19px] font-bold" style={{ color: 'var(--ink)' }}>
               We opened because a cookie tray kept running out.
             </p>
@@ -50,7 +52,7 @@ export default function AboutPage() {
               something on the counter, so we built a proper brief form for it: the occasion, the
               date, how many it feeds, the flavours, and a photo of what you have in mind.
             </p>
-          </div>
+          </Reveal>
 
           <Image
             src="/products/about-counter.webp"
@@ -74,10 +76,10 @@ export default function AboutPage() {
             Four things we will not bend on
           </h2>
           <div className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-2">
-            {VALUES.map((v) => {
+            {VALUES.map((v, i) => {
               const Icon = v.icon;
               return (
-                <div key={v.title} className="flex gap-4">
+                <Reveal key={v.title} delay={(i % 2) * 90} className="flex gap-4">
                   <span
                     className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full"
                     style={{ background: 'var(--brand-strong)', color: 'var(--brand-ink)' }}
@@ -88,7 +90,7 @@ export default function AboutPage() {
                     <h3 className="display text-[21px]" style={{ color: 'var(--ink)' }}>{v.title}</h3>
                     <p className="mt-1.5 text-[15px] leading-relaxed" style={{ color: 'var(--ink-soft)' }}>{v.body}</p>
                   </div>
-                </div>
+                </Reveal>
               );
             })}
           </div>
@@ -96,14 +98,7 @@ export default function AboutPage() {
       </section>
 
       <section className="mx-auto max-w-[1400px] px-4 py-16 text-center sm:px-6 lg:py-24">
-        <Image
-          src="/brand/locket-storefront.png"
-          alt={`The ${STORE.name} shopfront`}
-          width={520}
-          height={506}
-          sizes="(max-width: 640px) 80vw, 420px"
-          className="mx-auto mb-8 h-auto w-[280px] sm:w-[420px]"
-        />
+        <ShopMark width={420} sizes="(max-width: 640px) 80vw, 420px" className="mb-10" />
         <h2 className="display mx-auto max-w-[20ch] text-[32px] sm:text-[42px]" style={{ color: 'var(--brand-strong)' }}>
           Come by, or let us bring it to you
         </h2>

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { DEFAULT_RULES } from '@/domain/fulfillment/slots';
 import { PRODUCTS } from '@/domain/catalog/products';
 import { CUSTOM_ORDER_LEAD_DAYS } from '@/domain/fulfillment/leadtime';
+import { Reveal } from '@/components/motion/Reveal';
 
 /**
  * The figures here are read from the same configuration the checkout enforces,
@@ -18,7 +19,7 @@ export function StoryPreview() {
   return (
     <section className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6 lg:py-24" aria-labelledby="story-title">
       <div className="grid items-center gap-10 lg:grid-cols-[1fr_1.1fr] lg:gap-16">
-        <div className="relative">
+        <Reveal variant="left" className="relative">
           <Image
             src="/products/about-craft.webp"
             alt="Cookies cooling in a lined basket on the Locket counter"
@@ -36,9 +37,9 @@ export function StoryPreview() {
             height={150}
             className="absolute -bottom-7 -right-4 h-[118px] w-[118px] object-contain drop-shadow-lg lg:-right-10 lg:h-[150px] lg:w-[150px]"
           />
-        </div>
+        </Reveal>
 
-        <div>
+        <Reveal variant="right">
           <h2 id="story-title" className="display text-[36px] sm:text-[48px]" style={{ color: 'var(--brand-strong)' }}>
             A small kitchen that bakes to order
           </h2>
@@ -72,7 +73,7 @@ export function StoryPreview() {
           <Link href="/about" className="btn btn-outline mt-8 h-12 px-6 text-sm">
             More about the shop
           </Link>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

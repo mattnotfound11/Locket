@@ -1,9 +1,9 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { FacebookLogo, InstagramLogo, LockSimple, ArrowUp } from '@phosphor-icons/react/dist/ssr';
 import { STORE } from '@/config/store';
 import { CITY_DISTRICTS, CAMPUS_ZONES } from '@/domain/fulfillment/delivery';
 import { StoreStrip } from './StoreStrip';
+import { ShopMark } from './ShopMark';
 
 const LINKS = [
   { href: '/', label: 'Home' },
@@ -24,13 +24,7 @@ export function Footer() {
           style={{ borderTop: '1.5px solid var(--border)' }}
         >
           <div>
-            <Image
-              src="/brand/locket-storefront.png"
-              alt={`${STORE.name} shopfront`}
-              width={260}
-              height={253}
-              className="mb-4 h-auto w-[220px]"
-            />
+            <ShopMark width={220} sizes="220px" className="mb-5 items-start" />
             <p className="max-w-[34ch] text-[15px] leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
               {STORE.tagline}. Baked each morning in {STORE.address.city}, and never the day before.
             </p>

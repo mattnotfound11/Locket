@@ -6,6 +6,7 @@ import { PRODUCTS } from '@/domain/catalog/products';
 import { CATEGORIES } from '@/domain/catalog/categories';
 import { ALLERGEN_LABELS, type Allergen, type CategoryId } from '@/domain/catalog/types';
 import { ProductCard } from './ProductCard';
+import { Reveal } from '@/components/motion/Reveal';
 
 const FILTERABLE_ALLERGENS: Allergen[] = ['gluten', 'dairy', 'eggs', 'tree-nuts', 'peanuts', 'soy'];
 
@@ -134,7 +135,7 @@ export function MenuBrowser() {
         <div className="space-y-16">
           {grouped.map(({ category: c, items }, groupIndex) => (
             <section key={c.id} aria-labelledby={`cat-${c.id}`}>
-              <div className="mb-6 flex flex-wrap items-end justify-between gap-3">
+              <Reveal className="mb-6 flex flex-wrap items-end justify-between gap-3">
                 <div>
                   <h2 id={`cat-${c.id}`} className="display text-[30px] sm:text-[34px]" style={{ color: 'var(--brand-strong)' }}>
                     {c.name}
@@ -147,10 +148,14 @@ export function MenuBrowser() {
                 >
                   {items.length} item{items.length === 1 ? '' : 's'}
                 </span>
-              </div>
+              </Reveal>
               <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
                 {items.map((p, i) => (
-                  <ProductCard key={p.id} product={p} priority={groupIndex === 0 && i < 3} />
+                  // Stagger resets each row, so a card low in a long grid never
+                  // waits on the ones above it.
+                  <Reveal key={p.id} delay={(i % 3) * 80} variant="up">
+                    <ProductCard product={p} priority={groupIndex === 0 && i < 3} />
+                  </Reveal>
                 ))}
               </div>
             </section>

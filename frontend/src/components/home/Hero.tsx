@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight, Cake } from '@phosphor-icons/react/dist/ssr';
 import { STORE } from '@/config/store';
+import { ShopMark } from '@/components/layout/ShopMark';
 
 /**
  * Small cut-outs orbit the shopfront illustration rather than the headline, so
@@ -64,14 +65,11 @@ export function Hero() {
         </div>
 
         <div className="relative mx-auto w-full max-w-[440px] lg:max-w-[520px]">
-          <Image
-            src="/brand/locket-storefront.png"
-            alt={`The ${STORE.name} shopfront, hung with a pastel awning`}
-            width={1078}
-            height={1049}
+          <ShopMark
+            width={520}
             priority
             sizes="(max-width: 1024px) 90vw, 520px"
-            className="relative z-10 h-auto w-full object-contain drop-shadow-xl"
+            className="relative z-10"
           />
 
           {ORBIT.map((o) => (

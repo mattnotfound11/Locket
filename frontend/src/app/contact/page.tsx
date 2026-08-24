@@ -5,6 +5,7 @@ import { PageIntro } from '@/components/layout/PageIntro';
 import { ContactForm } from '@/components/layout/ContactForm';
 import { STORE, FULL_ADDRESS, MAP_EMBED_SRC, MAP_LINK, summarisedHours } from '@/config/store';
 import { OpenStatus } from '@/components/layout/OpenStatus';
+import { Reveal } from '@/components/motion/Reveal';
 
 export const metadata: Metadata = {
   title: 'Contact',
@@ -30,7 +31,7 @@ export default function ContactPage() {
 
       <section className="mx-auto max-w-[1400px] px-4 py-14 sm:px-6 lg:py-20">
         <div className="grid gap-4 sm:grid-cols-3">
-          {CHANNELS.map((c) => {
+          {CHANNELS.map((c, i) => {
             const Icon = c.icon;
             const external = c.href.startsWith('mailto') || c.href.startsWith('tel');
             const inner = (
@@ -46,10 +47,14 @@ export default function ContactPage() {
                 <p className="mt-1 text-[13px]" style={{ color: 'var(--ink-muted)' }}>{c.note}</p>
               </>
             );
-            return external ? (
-              <a key={c.title} href={c.href} className="card p-5 transition-transform hover:-translate-y-0.5">{inner}</a>
-            ) : (
-              <Link key={c.title} href={c.href} className="card p-5 transition-transform hover:-translate-y-0.5">{inner}</Link>
+            return (
+              <Reveal key={c.title} delay={i * 80}>
+                {external ? (
+                  <a href={c.href} className="card block p-5 transition-transform hover:-translate-y-0.5">{inner}</a>
+                ) : (
+                  <Link href={c.href} className="card block p-5 transition-transform hover:-translate-y-0.5">{inner}</Link>
+                )}
+              </Reveal>
             );
           })}
         </div>

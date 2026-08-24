@@ -4,11 +4,13 @@ import { ArrowRight } from '@phosphor-icons/react/dist/ssr';
 import { CUSTOM_ORDER_LEAD_DAYS } from '@/domain/fulfillment/leadtime';
 import { CUSTOM_DEPOSIT } from '@/domain/orders/custom';
 import { peso } from '@/domain/money';
+import { Reveal } from '@/components/motion/Reveal';
 
 export function CustomCta() {
   return (
     <section className="mx-auto max-w-[1400px] px-4 py-16 sm:px-6 lg:py-24" aria-labelledby="custom-title">
-      <div
+      <Reveal
+        variant="scale"
         className="relative grid items-center gap-8 overflow-hidden p-7 sm:p-10 lg:grid-cols-[1.15fr_1fr] lg:p-14"
         style={{ background: 'var(--brand-strong)', borderRadius: 'var(--radius-card)' }}
       >
@@ -51,7 +53,7 @@ export function CustomCta() {
             style={{ borderRadius: 'var(--radius-card)' }}
           />
         </div>
-      </div>
+      </Reveal>
     </section>
   );
 }

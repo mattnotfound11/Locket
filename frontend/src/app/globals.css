@@ -47,11 +47,11 @@
   --ink-soft: #7a5545;
   --ink-muted: #9c7b6b;
   --brand: #f0819f;
-  --brand-strong: #c9376e;
+  --brand-strong: #bf3268;
   --brand-ink: #ffffff;
   --border: #f5c9d4;
   --border-soft: #f6e2d6;
-  --ring: #c9376e;
+  --ring: #bf3268;
   --shadow-tint: 201 55 110;
 
   --ok: #2f7d5f;
@@ -122,8 +122,14 @@ body {
   color: var(--ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
+
+/*
+ * `clip` rather than `hidden`: hidden makes the element a scroll container,
+ * which would break `position: sticky` on the header and the checkout summary.
+ * clip just trims the overhang from the horizontal rails.
+ */
+html, body { overflow-x: clip; }
 
 ::selection { background: var(--brand); color: var(--brand-ink); }
 
@@ -211,3 +217,73 @@ body {
   animation: locket-shimmer 1.4s ease infinite;
 }
 @keyframes locket-shimmer { from { background-position: 100% 0; } to { background-position: -100% 0; } }
+
+/* ---------------------------------------------------------------------------
+ * MOTION
+ *
+ * Everything below animates only `opacity` and `transform`, so it runs on the
+ * compositor and never triggers layout. Nothing here uses a scroll listener.
+ *
+ * The `.motion-ready` class is set by an inline script before first paint. If
+ * scripting is unavailable the class never lands, the hidden states never
+ * apply, and every element renders plainly visible.
+ * ------------------------------------------------------------------------ */
+
+.motion-ready [data-reveal='hidden'] {
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.motion-ready [data-reveal='hidden'][data-reveal-variant='up'] { transform: translate3d(0, 18px, 0); }
+.motion-ready [data-reveal='hidden'][data-reveal-variant='fade'] { transform: none; }
+.motion-ready [data-reveal='hidden'][data-reveal-variant='scale'] { transform: scale(0.965); }
+.motion-ready [data-reveal='hidden'][data-reveal-variant='left'] { transform: translate3d(-22px, 0, 0); }
+.motion-ready [data-reveal='hidden'][data-reveal-variant='right'] { transform: translate3d(22px, 0, 0); }
+
+.motion-ready [data-reveal] {
+  transition:
+    opacity 620ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+    transform 720ms cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
+}
+
+.motion-ready [data-reveal='shown'] {
+  opacity: 1;
+  transform: none;
+  /* Released once the element has arrived, so long pages do not hold layers. */
+  will-change: auto;
+}
+
+/* Route change: a short rise and fade, replayed by a keyed remount. */
+@keyframes page-in {
+  from { opacity: 0; transform: translate3d(0, 12px, 0); }
+  to { opacity: 1; transform: none; }
+}
+.motion-ready .page-enter {
+  animation: page-in 460ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Sticky header lifts off the page once it is no longer at the top. */
+#scroll-sentinel { position: absolute; top: 0; height: 1px; width: 100%; pointer-events: none; }
+
+.site-header {
+  transition: box-shadow 260ms ease, background-color 260ms ease;
+}
+:root[data-scrolled] .site-header {
+  box-shadow: 0 6px 24px -12px rgb(var(--shadow-tint) / 0.45);
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+}
+
+/*
+ * Reduced motion: no reveals, no route animation, no float or spin. Content is
+ * shown in its final state immediately rather than merely animating faster.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .motion-ready [data-reveal],
+  .motion-ready [data-reveal='hidden'] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .motion-ready .page-enter { animation: none !important; }
+  .float-slow, .spin-slow { animation: none !important; }
+}

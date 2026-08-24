@@ -1,4 +1,5 @@
 import { BowlFood, CalendarCheck, CreditCard, HandHeart } from '@phosphor-icons/react/dist/ssr';
+import { Reveal } from '@/components/motion/Reveal';
 
 const STEPS = [
   { icon: BowlFood, title: 'Fill your basket', body: 'Browse the menu by category. Allergens are on every card.' },
@@ -15,15 +16,15 @@ export function HowItWorks() {
       aria-labelledby="how-title"
     >
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
-        <h2 id="how-title" className="display max-w-[18ch] text-[36px] sm:text-[48px]" style={{ color: 'var(--brand-strong)' }}>
+        <Reveal as="h2" id="how-title" className="display max-w-[18ch] text-[36px] sm:text-[48px]" style={{ color: 'var(--brand-strong)' }}>
           Ordering takes about a minute
-        </h2>
+        </Reveal>
 
         <ol className="mt-10 grid gap-x-6 gap-y-9 sm:grid-cols-2 lg:grid-cols-4">
-          {STEPS.map((s) => {
+          {STEPS.map((s, i) => {
             const Icon = s.icon;
             return (
-              <li key={s.title} className="relative pl-16">
+              <Reveal as="li" key={s.title} delay={i * 80} className="relative pl-16">
                 <span
                   className="absolute left-0 top-0 flex h-12 w-12 items-center justify-center rounded-full"
                   style={{ background: 'var(--brand-strong)', color: 'var(--brand-ink)' }}
@@ -32,7 +33,7 @@ export function HowItWorks() {
                 </span>
                 <h3 className="display text-[20px]" style={{ color: 'var(--ink)' }}>{s.title}</h3>
                 <p className="mt-1.5 text-[15px] leading-relaxed" style={{ color: 'var(--ink-soft)' }}>{s.body}</p>
-              </li>
+              </Reveal>
             );
           })}
         </ol>

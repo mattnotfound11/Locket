@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FacebookLogo, InstagramLogo, LockSimple, ArrowUp } from '@phosphor-icons/react/dist/ssr';
 import { STORE } from '@/config/store';
+import { CITY_DISTRICTS, CAMPUS_ZONES } from '@/domain/fulfillment/delivery';
 import { StoreStrip } from './StoreStrip';
 
 const LINKS = [
@@ -76,8 +77,18 @@ export function Footer() {
               <li>Same-day orders close at 2pm</li>
               <li>Whole cakes need 2 days</li>
               <li>Custom cakes need 5 days</li>
-              <li>Delivery across {STORE.address.region}</li>
+              <li>Delivery inside {STORE.address.city} only</li>
             </ul>
+
+            <h3 className="display mb-3 mt-7 text-[19px]" style={{ color: 'var(--brand-strong)' }}>
+              Where we deliver
+            </h3>
+            <p className="text-[14.5px] leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
+              All seven districts of {STORE.address.city}: {CITY_DISTRICTS.map((z) => z.name).join(', ')}.
+            </p>
+            <p className="mt-2 text-[14.5px] leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
+              Plus scheduled campus drops at {CAMPUS_ZONES.map((z) => z.name).join(' and ')}.
+            </p>
             <p
               className="mt-5 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[13px] font-bold"
               style={{ background: 'var(--surface)', color: 'var(--ink-soft)', border: '1.5px solid var(--border)' }}

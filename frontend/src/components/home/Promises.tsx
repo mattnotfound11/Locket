@@ -16,8 +16,8 @@ const PROMISES = [
   {
     icon: MopedFront,
     accent: 'var(--color-mint)',
-    title: 'Booked delivery windows',
-    body: 'Pick an hour that suits you. We cap each window so your order is never rushed out late.',
+    title: 'Delivered across Iloilo City',
+    body: 'All seven districts, plus campus drops at San Agustin and St. Paul. Pick an hour that suits you.',
   },
 ];
 

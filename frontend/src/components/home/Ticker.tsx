@@ -1,6 +1,6 @@
 import { STORE } from '@/config/store';
 
-const WORDS = [STORE.tagline, STORE.descriptor, 'Baked in Pasig', 'Same-day pickup', 'Custom cakes'];
+const WORDS = [STORE.tagline, STORE.descriptor, 'Baked in Iloilo', 'Same-day pickup', 'Custom cakes'];
 
 /** The one marquee on the site. It carries the brand line, nothing functional. */
 export function Ticker() {

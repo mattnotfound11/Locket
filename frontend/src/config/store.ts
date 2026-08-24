@@ -18,12 +18,13 @@ export const STORE = {
   descriptor: 'Cookies & More',
   legalName: 'Locket Fine Bakes',
 
+  // TODO: replace with the real shopfront address before launch.
   address: {
-    line1: '27 Sampaguita Street',
-    line2: 'Barangay Kapitolyo',
-    city: 'Pasig City',
-    region: 'Metro Manila',
-    postcode: '1603',
+    line1: '24 Lopez Jaena Street',
+    line2: 'Jaro',
+    city: 'Iloilo City',
+    region: 'Iloilo',
+    postcode: '5000',
     country: 'Philippines',
   },
 
@@ -35,7 +36,7 @@ export const STORE = {
    * Keyless Google Maps embed. The `output=embed` form needs no API key and no
    * billing account, which keeps the map working on every page without a secret.
    */
-  mapQuery: '27 Sampaguita Street, Kapitolyo, Pasig City, Metro Manila',
+  mapQuery: 'Lopez Jaena Street, Jaro, Iloilo City, Iloilo',
 
   social: {
     facebook: 'https://facebook.com/locketbakes',

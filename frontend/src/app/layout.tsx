@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   description:
     `${STORE.tagline}. Cookies, cupcakes, cakes and custom bakes from ${STORE.address.city}. ` +
     'Order online for pickup or delivery with a time slot that suits you.',
-  keywords: ['bakery', 'cookies', 'custom cake', STORE.address.city, 'Metro Manila', 'pastry'],
+  keywords: ['bakery', 'cookies', 'custom cake', STORE.address.city, 'Iloilo', 'Panay', 'pastry'],
   openGraph: {
     title: `${STORE.name} | ${STORE.descriptor}`,
     description: `${STORE.tagline}. Order online for pickup or delivery.`,

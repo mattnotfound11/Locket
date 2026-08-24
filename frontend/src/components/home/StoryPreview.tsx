@@ -44,8 +44,8 @@ export function StoryPreview() {
           </h2>
           <div className="mt-5 space-y-4 text-[16px] leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
             <p>
-              Locket started as a weekend cookie table and turned into a shopfront on Sampaguita Street.
-              We still bake in small trays, which is why some things sell out by the afternoon.
+              Locket started as a weekend cookie table and turned into a shopfront on Lopez Jaena
+              Street. We still bake in small trays, which is why some things sell out by the afternoon.
             </p>
             <p>
               Everything is made the morning you collect it. That is the whole reason we cap how many

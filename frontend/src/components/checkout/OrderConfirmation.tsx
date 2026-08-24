@@ -9,6 +9,7 @@ import { formatSlotDate } from '@/domain/fulfillment/slots';
 import { peso } from '@/domain/money';
 import { METHOD_BY_ID } from '@/domain/payments/methods';
 import { STORE, MAP_LINK } from '@/config/store';
+import { zoneLabel } from '@/domain/fulfillment/delivery';
 import { useCart } from '@/lib/cart';
 
 export function OrderConfirmation({ orderRef }: { orderRef: string }) {
@@ -101,7 +102,8 @@ export function OrderConfirmation({ orderRef }: { orderRef: string }) {
 
         {order.mode === 'delivery' ? (
           <p className="mt-4 text-[14.5px] leading-relaxed" style={{ color: 'var(--ink-soft)' }}>
-            Going to <strong style={{ color: 'var(--ink)' }}>{order.customer.address}</strong>. The rider
+            Going to <strong style={{ color: 'var(--ink)' }}>{order.customer.address}</strong>
+            {order.deliveryZone ? ` (${zoneLabel(order.deliveryZone)})` : ''}. The rider
             will call {order.customer.phone} on arrival.
           </p>
         ) : (

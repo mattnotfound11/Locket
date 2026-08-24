@@ -13,6 +13,9 @@ import { PAYMENT_METHODS, methodAllowed, type PaymentMethodId } from '@/domain/p
 import { PRICING } from '@/domain/cart/totals';
 import { leadTimeMessage } from '@/domain/fulfillment/leadtime';
 import { formatSlotDate, type FulfilmentMode } from '@/domain/fulfillment/slots';
+import {
+  CITY_DISTRICTS, CAMPUS_ZONES, ZONE_BY_ID, isServiceableZone,
+} from '@/domain/fulfillment/delivery';
 import { SlotPicker } from './SlotPicker';
 import { QuantityStepper } from '../menu/QuantityStepper';
 import { Field } from '../layout/ContactForm';
@@ -28,6 +31,7 @@ export function CheckoutClient() {
 
   const [slot, setSlot] = useState<Selected>(null);
   const [details, setDetails] = useState({ name: '', email: '', phone: '', address: '', notes: '' });
+  const [zone, setZone] = useState('');
   const [chosenMethod, setMethod] = useState<PaymentMethodId>('gcash');
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -55,7 +59,12 @@ export function CheckoutClient() {
     if (!details.name.trim()) next.name = 'We need a name for the order.';
     if (!EMAIL.test(details.email)) next.email = 'Enter a working email so we can send your receipt.';
     if (!PH_PHONE.test(details.phone.replace(/[\s-]/g, ''))) next.phone = 'Enter a mobile number like 0917 428 3067.';
-    if (mode === 'delivery' && details.address.trim().length < 12) next.address = 'A full delivery address, including barangay.';
+    if (mode === 'delivery' && !isServiceableZone(zone)) next.zone = 'Choose which part of Iloilo City we are delivering to.';
+    if (mode === 'delivery' && details.address.trim().length < 12) {
+      next.address = ZONE_BY_ID[zone]?.kind === 'campus'
+        ? 'Tell us the department or who to hand it to.'
+        : 'A full delivery address, including the barangay.';
+    }
     if (!slot) next.slot = 'Choose a collection window above.';
     setErrors(next);
     return Object.keys(next).length === 0;
@@ -80,6 +89,7 @@ export function CheckoutClient() {
           items: lines.map((l) => ({ productId: l.product.id, quantity: l.quantity })),
           customer: details,
           paymentMethod: method,
+          deliveryZone: mode === 'delivery' ? zone : undefined,
         }),
       });
       const data = await res.json();
@@ -181,8 +191,8 @@ export function CheckoutClient() {
 
             <div className="mb-5 grid gap-2 sm:grid-cols-2" role="group" aria-label="Pickup or delivery">
               {([
-                { id: 'pickup', label: 'Pick up in store', note: 'Free. Sampaguita Street, Pasig.', icon: Storefront },
-                { id: 'delivery', label: 'Delivery', note: `${peso(PRICING.deliveryFee)}, free over ${peso(PRICING.freeDeliveryFrom)}.`, icon: MopedFront },
+                { id: 'pickup', label: 'Pick up in store', note: 'Free. Lopez Jaena Street, Jaro.', icon: Storefront },
+                { id: 'delivery', label: 'Delivery', note: `Iloilo City only. ${peso(PRICING.deliveryFee)}, free over ${peso(PRICING.freeDeliveryFrom)}.`, icon: MopedFront },
               ] as const).map((opt) => {
                 const Icon = opt.icon;
                 const active = mode === opt.id;
@@ -250,10 +260,52 @@ export function CheckoutClient() {
             </Field>
 
             {mode === 'delivery' && (
-              <Field id="co-address" label="Delivery address" hint="Include the barangay and any landmark." error={errors.address}>
-                <textarea id="co-address" rows={3} className="field resize-y" value={details.address} onChange={set('address')}
-                  aria-invalid={Boolean(errors.address)} autoComplete="street-address" />
-              </Field>
+              <>
+                <Field
+                  id="co-zone"
+                  label="Where in Iloilo City"
+                  hint="We deliver across the city, plus scheduled drops at the campuses listed."
+                  error={errors.zone}
+                >
+                  <select
+                    id="co-zone"
+                    className="field"
+                    value={zone}
+                    onChange={(e) => { setZone(e.target.value); setErrors((p) => ({ ...p, zone: '' })); }}
+                    aria-invalid={Boolean(errors.zone)}
+                  >
+                    <option value="" disabled>Choose an area</option>
+                    <optgroup label="Iloilo City districts">
+                      {CITY_DISTRICTS.map((z) => <option key={z.id} value={z.id}>{z.name}</option>)}
+                    </optgroup>
+                    <optgroup label="Campus drop-off">
+                      {CAMPUS_ZONES.map((z) => <option key={z.id} value={z.id}>{z.name}</option>)}
+                    </optgroup>
+                  </select>
+                </Field>
+
+                {ZONE_BY_ID[zone]?.note && (
+                  <p
+                    className="-mt-2 flex items-start gap-2 rounded-[var(--radius-input)] p-3 text-[13px] font-semibold"
+                    style={{ background: 'var(--surface-2)', color: 'var(--ink-soft)' }}
+                  >
+                    <Info size={15} weight="fill" aria-hidden className="mt-0.5 shrink-0" />
+                    {ZONE_BY_ID[zone].note}
+                  </p>
+                )}
+
+                <Field
+                  id="co-address"
+                  label={ZONE_BY_ID[zone]?.kind === 'campus' ? 'Department and who to hand it to' : 'Delivery address'}
+                  hint={ZONE_BY_ID[zone]?.kind === 'campus'
+                    ? 'For example: College of Nursing, ask for Marisol.'
+                    : 'Street, barangay and any landmark that helps the rider.'}
+                  error={errors.address}
+                >
+                  <textarea id="co-address" rows={3} className="field resize-y" value={details.address} onChange={set('address')}
+                    aria-invalid={Boolean(errors.address)} autoComplete="street-address" />
+                </Field>
+              </>
             )}
 
             <Field id="co-notes" label="Anything we should know" hint="Allergies, a message to pipe, or where to leave it.">

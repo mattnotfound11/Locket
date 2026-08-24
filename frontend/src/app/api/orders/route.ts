@@ -9,6 +9,7 @@ import { generateOrderRef, type Order, type OrderStatus } from '@/domain/orders/
 import { methodAllowed, type PaymentMethodId } from '@/domain/payments/methods';
 import { getPaymentGateway } from '@/domain/payments/adapters';
 import { getOrderRepository } from '@/infrastructure/repositories/orders';
+import { isServiceableZone, OUT_OF_AREA_MESSAGE } from '@/domain/fulfillment/delivery';
 
 export const dynamic = 'force-dynamic';
 
@@ -18,6 +19,7 @@ interface PlaceOrderBody {
   items: { productId: string; quantity: number }[];
   customer: { name: string; email: string; phone: string; address?: string; notes?: string };
   paymentMethod: PaymentMethodId;
+  deliveryZone?: string;
   payDepositOnly?: boolean;
 }
 
@@ -51,6 +53,12 @@ export async function POST(request: Request) {
   }
   if (mode === 'delivery' && !customer?.address?.trim()) {
     return NextResponse.json({ error: 'Delivery needs a full address.' }, { status: 400 });
+  }
+  // We only serve Iloilo City and the listed campuses. Checked here as well as
+  // in the form, so a delivery outside the area cannot be booked by posting
+  // straight at the API.
+  if (mode === 'delivery' && !isServiceableZone(body.deliveryZone)) {
+    return NextResponse.json({ error: OUT_OF_AREA_MESSAGE }, { status: 400 });
   }
 
   // Rebuild the cart from the catalogue. Prices are never trusted from the client.
@@ -142,6 +150,7 @@ export async function POST(request: Request) {
     ref,
     placedAt: new Date().toISOString(),
     mode,
+    deliveryZone: mode === 'delivery' ? body.deliveryZone : undefined,
     slot: { ...slot, label: resolved.label },
     lines: lines.map((l) => ({
       productId: l.product.id, name: l.product.name,

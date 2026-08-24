@@ -25,7 +25,7 @@ export default function ContactPage() {
       <PageIntro
         eyebrow="Contact"
         title="Come and find us"
-        lede={`We are on Sampaguita Street in ${STORE.address.city}, a short walk from the Kapitolyo strip. Call ahead if you want a whole cake held for the afternoon.`}
+        lede={`We are on Lopez Jaena Street in Jaro, a short ride from the plaza. We deliver across ${STORE.address.city} and run scheduled drops at University of San Agustin and St. Paul University Iloilo.`}
       />
 
       <section className="mx-auto max-w-[1400px] px-4 py-14 sm:px-6 lg:py-20">

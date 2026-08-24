@@ -24,6 +24,8 @@ export interface Order {
   readonly ref: string;
   readonly placedAt: string;
   readonly mode: FulfilmentMode;
+  /** Set for delivery orders only: which serviceable zone it is going to. */
+  readonly deliveryZone?: string;
   readonly slot: SlotId & { readonly label: string };
   readonly lines: readonly OrderLineSnapshot[];
   readonly customer: CustomerDetails;

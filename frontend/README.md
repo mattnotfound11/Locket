@@ -1,6 +1,6 @@
 # Locket — Cookies & More
 
-Storefront and ordering system for Locket, a bakery in Kapitolyo, Pasig City.
+Storefront and ordering system for Locket, a bakery in Jaro, Iloilo City.
 
 **Live:** https://locket-bakes.vercel.app
 
@@ -59,11 +59,24 @@ Two rules hold this together:
 | Custom cakes need 5 days, or 10 over 40 servings | `domain/fulfillment/leadtime.ts` |
 | Deposit of 50% over ₱1,500 | `domain/cart/totals.ts` |
 | Delivery ₱120, free over ₱2,000 | `PRICING` |
+| Delivery inside Iloilo City and two campuses only | `domain/fulfillment/delivery.ts` |
 | Cash cannot cover a deposit order | `domain/payments/methods.ts` |
 
 Changing a number in those files changes the site, the API and the tests
 together. The home page reads its figures from the same constants, so the
 marketing copy cannot drift away from what checkout enforces.
+
+## Delivery area
+
+Locket delivers inside Iloilo City only: all seven districts (City Proper, Jaro,
+La Paz, Mandurriao, Molo, Arevalo, Lapuz), plus scheduled drops at University of
+San Agustin and St. Paul University Iloilo.
+
+This is enforced, not just written on the page. Checkout makes the customer pick
+a zone, and `POST /api/orders` re-checks it, so a delivery to Bacolod or a
+neighbouring town cannot be booked by typing it into the address box or by
+posting straight at the API. Adding or removing an area is one entry in
+`DELIVERY_ZONES`.
 
 ## Going live
 

@@ -24,7 +24,7 @@ export default function AboutPage() {
     <>
       <PageIntro
         eyebrow="About"
-        title="The shop on Sampaguita Street"
+        title="The shop on Lopez Jaena Street"
         lede={`${STORE.tagline}. What began as a weekend cookie table now runs as a small kitchen with a shopfront, a delivery bike and a very full Saturday.`}
       />
 
@@ -40,10 +40,10 @@ export default function AboutPage() {
               start turning people away.
             </p>
             <p>
-              The shop on Sampaguita Street opened so we could bake through the day instead of once
-              before dawn. The kitchen is still small on purpose. Every batch is mixed, portioned and
-              baked in trays that fit our ovens, which is the honest reason some things carry a sold
-              out flag by mid afternoon.
+              The shop in Jaro opened so we could bake through the day instead of once before dawn.
+              The kitchen is still small on purpose. Every batch is mixed, portioned and baked in
+              trays that fit our ovens, which is the honest reason some things carry a sold out flag
+              by mid afternoon.
             </p>
             <p>
               Custom work grew out of the same thing. People kept asking for the birthday version of

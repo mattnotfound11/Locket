@@ -4,7 +4,21 @@ Storefront and ordering system for Locket, a bakery in Jaro, Iloilo City.
 
 **Live:** https://locket-bakes.vercel.app
 
-Next.js 16 (App Router) + React 19 + Tailwind v4. Deployed on Vercel.
+**Repository:** https://github.com/mattnotfound11/Locket
+
+Next.js 16 (App Router) + React 19 + Tailwind v4.
+
+## Deploying
+
+The Vercel project `locket-bakes` is connected to the GitHub repository, so a
+push to `main` builds and deploys on its own. No CLI step is needed.
+
+One setting makes that work: the repository root is the `LOCKET` workspace but
+the app lives in `frontend/`, so the project's **Root Directory is set to
+`frontend`**. Without it a Git build looks for `package.json` at the repository
+root and fails.
+
+To deploy by hand instead, run `vercel --prod` from `frontend/`.
 
 ## Running it
 

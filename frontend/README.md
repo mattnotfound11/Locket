@@ -6,8 +6,7 @@ Storefront and ordering system for Locket, a bakery in Jaro, Iloilo City.
 
 **Repository:** https://github.com/mattnotfound11/Locket
 
-**Vercel project:** https://vercel.com/acadexa/locket-bakes/EQftasXoeX6g1WHmottQQp112bCM
-(dashboard; needs a Vercel login on the `acadexa` team)
+**Deployment:** https://locket-bakes-qgqwpu1t0-acadexa.vercel.app
 
 Next.js 16 (App Router) + React 19 + Tailwind v4.
 
